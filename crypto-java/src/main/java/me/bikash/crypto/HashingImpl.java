@@ -12,28 +12,24 @@ import java.security.NoSuchAlgorithmException;
  *
  * @author bikash
  */
-public class Hashing {
-    public static String sha256(String input) throws Exception{
-        MessageDigest md= MessageDigest.getInstance("SHA3-256");
+public class HashingImpl {
+    public static String hashing(String input,String algorithm) throws Exception{
+        MessageDigest md= MessageDigest.getInstance(algorithm);
         byte[] hashbyte=md.digest(input.getBytes("utf-8"));
         String hash
             = BaseEncoding.base16().encode(hashbyte);
   
-        // Print and display the string
-        System.out.println(hash);
     return hash;
     }
-    public static String sha256WithSalt(String input) throws Exception{
+    public static String hashingWithSalt(String input,String algorithm) throws Exception{
         byte[] salt={0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
         
-        MessageDigest md= MessageDigest.getInstance("SHA-256");
+        MessageDigest md= MessageDigest.getInstance(algorithm);
         md.update(salt);
         byte[] hashbyte=md.digest(input.getBytes("utf-8"));
         String hash
             = BaseEncoding.base16().encode(hashbyte);
-  
-        // Print and display the string
-        System.out.println(hash);
+ 
     return hash;
     }
 }
